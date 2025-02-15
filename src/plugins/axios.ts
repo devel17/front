@@ -2,7 +2,7 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 // import store from '@/stores'
 const httpClient = axios.create({
-    baseURL: (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL : '') + import.meta.env.VITE_API,
+    baseURL: (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL : '') + import.meta.env.VITE_API_POSTFIX,
     withCredentials: true,
     headers: {
         'X-Frame-Options': 'SAMEORIGIN',
