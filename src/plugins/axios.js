@@ -1,5 +1,5 @@
-import axios from 'axios'
-import cookies from 'vue-cookies'
+import axios from 'axios';
+import cookies from 'vue-cookies';
 // import store from '@/stores'
 const httpClient = axios.create({
     baseURL: (import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL : '') + import.meta.env.VITE_API_POSTFIX,
@@ -11,19 +11,17 @@ const httpClient = axios.create({
         'X-Content-Type-Options': 'nosniff',
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'
     }
-})
+});
 httpClient.interceptors.request.use((config) => {
-    const token = cookies.get('access_token')
+    const token = cookies.get('access_token');
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`;
     }
-    return config
-})
-
+    return config;
+});
 httpClient.interceptors.response.use(response => {
-    return Promise.resolve(response)
-},
-(err) => {
+    return Promise.resolve(response);
+}, (err) => {
     if (err.response) {
         // if (errors.includes(err.response.status)) {
         //     store.dispatch('setError', err)
@@ -59,9 +57,6 @@ httpClient.interceptors.response.use(response => {
         //     store.commit('setSessionContinue', true)
         // }
     }
-    
-    return Promise.reject(err)
-})
-
-
-export { httpClient }
+    return Promise.reject(err);
+});
+export { httpClient };

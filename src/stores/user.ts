@@ -7,7 +7,7 @@ interface UserState {
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    roles: [], // Список ролей пользователя
+    roles: [] as string[], // Список ролей пользователя
   }),
   actions: {
     setRoles(roles: string[]) {

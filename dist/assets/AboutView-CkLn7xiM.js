@@ -1,0 +1,1 @@
+import{a as t,_ as n,g as s,b as o,o as a}from"./index-o1QpZYlx.js";const i=t({name:"AboutView"}),r={style:{"background-color":"#fff"}};function p(c,e,l,u,d,f){return a(),s("div",r,e[0]||(e[0]=[o("h1",null,"About Page",-1),o("p",null,"This is a simple Vue 3 prototype with TypeScript, Pinia, Ant Design Vue, and Keycloak.",-1)]))}const m=n(i,[["render",p]]);export{m as default};

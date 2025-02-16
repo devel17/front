@@ -47,7 +47,7 @@ export default class Header extends Vue {
   private username: string = '';
   private selectedKeys: string[] = ['1'];
 
-  private created() {
+  public created() {
     this.username = keycloakService.getKeycloakInstance().tokenParsed?.preferred_username || 'Гость';
     keycloakService.setRoles();
     this.loadMenuItems();

@@ -61,15 +61,15 @@ export default defineComponent({
     };
     const fetchMenuItemsFromAPI = async (): Promise<MenuProps['items']> => {
     try {
-      const response = await httpClient.get('/system/menu/header'); // Замените на ваш URL API
-      return response.data.map((item: any, index) => ({
-      key: index,
-      label: item,
-    }));
+      const response = await httpClient.get('/system/menu/header');
+      return response.data.map((item: any, index: number) => ({
+        key: index.toString(),
+        label: item,
+      }));
     } catch (error) {
-    console.error('Error fetching menu items:', error);
-    return [];
-  }
+      console.error('Error fetching menu items:', error);
+      return [];
+    }
 };
     onMounted(loadMenuItems);
     return {
@@ -91,10 +91,10 @@ export default defineComponent({
     handleLogout() {
       keycloakService.logout(); // Вызов функции выхода
     },
-    handleMenuClick(key)  {
+    handleMenuClick(key: string) {
       console.log('Menu item clicked:', key);
       if (key === '4') {
-        logout(); // Вызов функции выхода
+        this.handleLogout(); // Используем метод класса вместо глобальной функции
       }
     }
   },

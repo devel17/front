@@ -84,7 +84,7 @@
         <a-col :span="12">
           <a-form-item label="DateTime" name="dateTime">
             <a-date-picker v-model:value="form.dateTime" style="width: 100%"
-              :get-popup-container="trigger => trigger.parentNode" />
+              :get-popup-container="getPopupContainer" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -116,10 +116,9 @@
 <script lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue';
 import { computed, defineComponent, reactive, toRefs, ref } from 'vue';
-import { ColumnProps } from 'ant-design-vue/es/table/interface';
 import ClientTable from '@/components/clients/ClientTable.vue';
 
-type Key = ColumnProps['key'];
+type Key = string;
 
 interface DataType {
   key: Key;
@@ -188,14 +187,14 @@ const columns = [
 const data: Client[] = [];
 for (let i = 0; i < 46; i++) {
   data.push({
-    key: i,
+    key: i.toString(),
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`,
-    phone: "+7 9"+i+"9 "+i+"34567",
-    email: i+"@bb.ru",
+    phone: "+7 9" + i + "9 " + i + "34567",
+    email: i + "@bb.ru",
     status: "Active",
-    registrationDate:  '2023-01-15',
+    registrationDate: '2023-01-15',
   });
 }
 
@@ -279,6 +278,11 @@ const state = reactive<{
 
     };
   },
+  methods: {
+    getPopupContainer(trigger: HTMLElement) {
+      return trigger.parentNode as HTMLElement;
+    }
+  }
 });
 </script>
 <style>

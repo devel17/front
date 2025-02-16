@@ -36,21 +36,18 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue } from 'vue-property-decorator';
 import { Table, Button, message } from 'ant-design-vue';
-import { Client, Key } from '@/interfaces/Client';
+import { Client, Key } from '@/interfaces/clients/Client';
 import { ref } from 'vue';
 import { httpClient } from '@/plugins/axios';
 
 export default class ClientTable extends Vue {
 
-    private state = ref<{
-        selectedRowKeys: Key[];
-        loading: boolean;
-    }>({
-        selectedRowKeys: [], // Check here to configure the default column
+    state = {
+        selectedRowKeys: [] as Key[],
         loading: false,
-    });
+    };
 
     private clients: Client[] = [];
     private columns = [
@@ -111,24 +108,13 @@ export default class ClientTable extends Vue {
         },
     };
 
-    private async mounted() {
+    public async mounted() {
         this.state.loading = true;
         try {
             const response = await this.loadClients();
-            this.clients = response.data;
-            // for (let i = 0; i < 46; i++) {
-            //     this.clients.push({
-            //         key: i,
-            //         name: `Edward King ${i}`,
-            //         age: 32,
-            //         address: `London, Park Lane no. ${i}`,
-            //         phone: "+7 9" + i + "9 " + i + "34567",
-            //         email: i + "@bb.ru",
-            //         status: "Active",
-            //         region: "BY",
-            //         registrationDate: '2023-01-15',
-            //     });
-            // }
+            if (response && response.data) {
+                this.clients = response.data;
+            }
         } catch (error) {
             console.error('Error loading clients:', error);
         } finally {
